@@ -2,7 +2,7 @@
 
 ## Project init
 
-#### Filter is a [ruby filter plagin:](https://www.elastic.co/guide/en/logstash/current/plugins-filters-ruby.html)
+#### Filter is a [ruby filter plagin](https://www.elastic.co/guide/en/logstash/current/plugins-filters-ruby.html)
 
 #### Run docker containers:
 `docker-compose up -d`

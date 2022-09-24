@@ -1,0 +1,2 @@
+{"@timestamp":"2022-09-22T23:35:33.146696+07:00","log.level":"INFO","message":"Start cron import data","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"cron":"cron import"}
+{"@timestamp":"2022-09-22T23:44:47.789749+07:00","log.level":"INFO","message":"Start cron import data","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"cron":"cron import"}

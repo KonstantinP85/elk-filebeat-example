@@ -1,0 +1,4 @@
+{"@timestamp":"2022-09-22T23:34:21.774643+07:00","log.level":"INFO","message":"Start sale ticket","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"method":"301"}
+{"@timestamp":"2022-09-22T23:34:38.060323+07:00","log.level":"INFO","message":"Start refund ticket","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"method":"302"}
+{"@timestamp":"2022-09-22T23:43:26.339891+07:00","log.level":"INFO","message":"Start sale ticket","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"method":"301"}
+{"@timestamp":"2022-09-22T23:43:44.707334+07:00","log.level":"INFO","message":"Start sale ticket","ecs.version":"1.2.0","log":{"logger":"ELK Logger"},"method":"301"}

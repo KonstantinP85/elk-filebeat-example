@@ -1,0 +1,82 @@
+version: '3.3'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:8.4.1
+    environment:
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    stdin_open: true
+    tty: true
+    network_mode: bridge
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "50"
+
+  kibana:
+    container_name: kibana
+    image: kibana:8.4.1
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch:elasticsearch
+    depends_on:
+      - elasticsearch
+    stdin_open: true
+    tty: true
+    network_mode: bridge
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "50"
+
+  logstash:
+    container_name: logstash
+    image: logstash:8.4.1
+    volumes:
+      - ./docker/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5044:5044
+    links:
+      - elasticsearch:elasticsearch
+    depends_on:
+      - elasticsearch
+    stdin_open: true
+    tty: true
+    network_mode: bridge
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "50"
+
+  filebeat:
+    user: root
+    container_name: filebeat
+    image: elastic/filebeat:8.4.1
+    links:
+      - logstash:logstash
+    depends_on:
+      - logstash
+    volumes:
+      - /var/run/docker.sock:/host_docker/docker.sock
+      - /var/lib/docker:/host_docker/var/lib/docker
+      - ./var/log:/usr/share/filebeat/log
+      - ./docker/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+    command: ["--strict.perms=false"]
+    stdin_open: true
+    tty: true
+    network_mode: bridge
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "50"
